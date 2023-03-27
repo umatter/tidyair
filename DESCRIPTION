@@ -12,10 +12,11 @@ RoxygenNote: 7.2.3
 Depends: R (>= 2.10)
 Suggests: 
     testthat (>= 3.0.0)
-Remotes:
-    umatter/OpenAIR
 Config/testthat/edition: 3
 Imports: 
     magrittr,
     OpenAIR,
     readr
+Remotes:
+    umatter/OpenAIR
+URL: https://umatter.github.io/tidyair/
