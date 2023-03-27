@@ -6,7 +6,7 @@
  [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of tidyair is to ...
+Tidy Data With Large Language Models.
 
 ## Installation
 
@@ -22,7 +22,21 @@ devtools::install_github("umatter/tidyair")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
+# load package
 library(tidyair)
-## basic example code
+
+# set your OpenAI API key
+OpenAIR::openai_api_key("YOUR-KEY-HERE")
+
+ # Create a messy data.frame with air data
+ messy_data <- data.frame(
+   date_pm25 = c("2021-01-01|10", "2021-01-02|12", "2021-01-03|15"),
+   date_pm10 = c("2021-01-01|20", "2021-01-02|25", "2021-01-03|30"),
+   stringsAsFactors = FALSE
+ )
+
+ # Process the data.frame using tidyair
+ tidied_data <- tidyair(air_data)
+ print(tidied_data)
 ```
 
