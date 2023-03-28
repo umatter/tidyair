@@ -1,5 +1,4 @@
 
-devtools::load_all()
 # Check if the API key is available
 if (!nchar(Sys.getenv("OPENAI_API_KEY")) == 0) {
 
