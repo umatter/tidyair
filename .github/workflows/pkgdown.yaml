@@ -44,6 +44,6 @@ jobs:
           clean: false
           branch: gh-pages
           folder: docs
-          token: ${{ secrets.GH_PAGES_TOKEN }}
+          token: ${{ secrets.GH_PAGES_TOKEN_TIDYAIR }}
 
 
