@@ -2,11 +2,22 @@
 #'
 #' This message content serves as user input for the json_to_csv function.
 #'
-#' @format ## `json_to_csv_input`
+#' @format ## `json_to_csv_prompt`
 #' A data frame with 2 rows and 2 columns representing the messages object in API calls.
 #' @source Contributed by umatter
 #'
-"json_to_csv_input"
+"json_to_csv_prompt"
+
+
+#' Input: message content template for xml_to_csv()
+#'
+#' This message content serves as user input for the xml_to_csv function.
+#'
+#' @format ## `xml_to_csv_prompt`
+#' A data frame with 2 rows and 2 columns representing the messages object in API calls.
+#' @source Contributed by umatter
+#'
+"xml_to_csv_prompt"
 
 
 #' Input: message content template for tidyair()
@@ -17,4 +28,4 @@
 #' A data frame with 2 rows and 2 columns representing the messages object in API calls.
 #' @source Contributed by umatter
 #'
-"tidyair_input"
+"tidyair_prompt"
