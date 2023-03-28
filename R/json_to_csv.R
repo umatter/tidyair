@@ -21,6 +21,7 @@
 #' ]}'
 #' json_to_csv(json_string)
 #' }
+#' @import OpenAIR
 #' @export
 json_to_csv <- function(file) {
 
@@ -37,14 +38,14 @@ json_to_csv <- function(file) {
   }
 
   # Create user input
-  n_msgs <- nrow(json_to_csv_input)
-  json_to_csv_input$content[n_msgs] <-
-    sprintf(fmt = json_to_csv_input$content[n_msgs], text)
+  n_msgs <- nrow(json_to_csv_prompt)
+  json_to_csv_prompt$content[n_msgs] <-
+    sprintf(fmt = json_to_csv_prompt$content[n_msgs], text)
 
   # Generate response output by chatting
-  resp <- OpenAIR::chat_completion(json_to_csv_input)
-  total_tokens_used <- OpenAIR::usage(resp)$total_tokens
-  message("Total tokens used: ", total_tokens_used)
+  resp <- OpenAIR::chat_completion(json_to_csv_prompt)
+  #total_tokens_used <- OpenAIR::usage(resp)$total_tokens
+  #message("Total tokens used: ", total_tokens_used)
 
   # extract output
   output <-

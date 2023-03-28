@@ -14,7 +14,8 @@
 #' @author Ulrich Matter umatter@protonmail.com
 #'
 #' @export
-#'
+#' @import OpenAIR
+#' @importClassesFrom OpenAIR chatlog
 #' @examples
 #' \dontrun{
 #' # Create a messy data.frame with air data
@@ -60,14 +61,14 @@ tidyair <- function(file) {
     paste0(collapse = "\n")
 
   # Create user input
-  n_msgs <- nrow(tidyair_input)
-  tidyair_input$content[n_msgs] <-
-    sprintf(fmt = tidyair_input$content[n_msgs], text)
+  n_msgs <- nrow(tidyair_prompt)
+  tidyair_prompt$content[n_msgs] <-
+    sprintf(fmt = tidyair_prompt$content[n_msgs], text)
 
   # Generate response output by chatting
-  resp <- OpenAIR::chat_completion(tidyair_input)
-  total_tokens_used <- OpenAIR::usage(resp)$total_tokens
-  message("Total tokens used: ", total_tokens_used)
+  resp <- OpenAIR::chat_completion(tidyair_prompt)
+  #total_tokens_used <- OpenAIR::usage(resp)$total_tokens
+  #message("Total tokens used: ", total_tokens_used)
 
   # extract output
   output <-

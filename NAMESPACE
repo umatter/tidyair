@@ -3,4 +3,7 @@
 export("%>%")
 export(json_to_csv)
 export(tidyair)
+export(xml_to_csv)
+import(OpenAIR)
+importClassesFrom(OpenAIR,chatlog)
 importFrom(magrittr,"%>%")
