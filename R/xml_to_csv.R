@@ -6,6 +6,8 @@
 #' generated with the same name as the input file but with a .csv extension.
 #'
 #' @param file A character string representing the path to the file with XML input
+#' @param n_tokens_limit An integer representing the maximum number of tokens allowed in the input text. Defaults to 2000.
+#' @param ... Additional arguments passed down to lower-level functions.
 #'
 #' @return If the input is a character string, the function returns the output
 #' as a character string and prints it to the console. Otherwise, the function returns
@@ -31,7 +33,7 @@
 #'</employees>'
 #' xml_to_csv(xml_string)
 #' }
-xml_to_csv <- function(file) {
+xml_to_csv <- function(file, n_tokens_limit = 2000, ...) {
 
   # import, process text
   r_function <- OpenAIR::read_text(file)
@@ -39,10 +41,17 @@ xml_to_csv <- function(file) {
     r_function$text %>%
     paste0(collapse = "\n")
 
+  # check validity of input text
   if (unique(r_function$file)=="character string") {
     if (!OpenAIR::is_xml(text)){
       stop("No valid XML string provided!")
     }
+  }
+
+  # Make sure the text input is not too long
+  n_tokens <- count_tokens(text)
+  if (n_tokens_limit < n_tokens) {
+    stop("Text input contains too many tokens!")
   }
 
   # Create user input
@@ -51,7 +60,7 @@ xml_to_csv <- function(file) {
     sprintf(fmt = xml_to_csv_prompt$content[n_msgs], text)
 
   # Generate response output by chatting
-  resp <- OpenAIR::chat_completion(xml_to_csv_prompt)
+  resp <- OpenAIR::chat_completion(xml_to_csv_prompt, ...)
   #total_tokens_used <- OpenAIR::usage(resp)$total_tokens
   #message("Total tokens used: ", total_tokens_used)
 

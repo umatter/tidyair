@@ -4,10 +4,14 @@
 \alias{xml_to_csv}
 \title{Convert XML input to CSV}
 \usage{
-xml_to_csv(file)
+xml_to_csv(file, n_tokens_limit = 2000, ...)
 }
 \arguments{
 \item{file}{A character string representing the path to the file with XML input}
+
+\item{n_tokens_limit}{An integer representing the maximum number of tokens allowed in the input text. Defaults to 2000.}
+
+\item{...}{Additional arguments passed down to lower-level functions.}
 }
 \value{
 If the input is a character string, the function returns the output

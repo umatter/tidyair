@@ -16,7 +16,8 @@ Config/testthat/edition: 3
 Imports: 
     magrittr,
     OpenAIR,
-    readr
+    readr,
+    rvest
 Remotes:
     umatter/OpenAIR
 URL: https://umatter.github.io/tidyair/

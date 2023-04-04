@@ -2,12 +2,16 @@
 % Please edit documentation in R/html_to_csv.R
 \name{html_to_csv}
 \alias{html_to_csv}
-\title{Convert HTML input to CSV}
+\title{Convert HTML Table Elements to CSV}
 \usage{
-html_to_csv(file)
+html_to_csv(file, n_tokens_limit = 2000, ...)
 }
 \arguments{
-\item{file}{A character string representing the path to the file with HTML input}
+\item{file}{A character string representing the path to the file with HTML input.}
+
+\item{n_tokens_limit}{An integer representing the maximum number of tokens allowed in the input text. Defaults to 2000.}
+
+\item{...}{Additional arguments passed down to lower-level functions.}
 }
 \value{
 If the input is a character string, the function returns the output
@@ -23,6 +27,7 @@ generated with the same name as the input file but with a .csv extension.
 }
 \examples{
 \dontrun{
+# Example 1: HTML string
 html_string <- '<table>
  <tr>
    <th>firstName</th>
@@ -42,5 +47,10 @@ html_string <- '<table>
  </tr>
 </table>'
 html_to_csv(html_string)
+
+# Example 2: HTML file
+html_file <- "example.html"
+html_to_csv(html_file)
 }
+
 }
