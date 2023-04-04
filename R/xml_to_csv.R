@@ -5,7 +5,7 @@
 #' the output will be printed to the console. Otherwise, a CSV file will be
 #' generated with the same name as the input file but with a .csv extension.
 #'
-#' @param file A character string representing the path to the file with XML input
+#' @param file A character string representing the path to the file with XML input.
 #' @param n_tokens_limit An integer representing the maximum number of tokens allowed in the input text. Defaults to 2000.
 #' @param ... Additional arguments passed down to lower-level functions.
 #'
@@ -13,9 +13,10 @@
 #' as a character string and prints it to the console. Otherwise, the function returns
 #' the output as a data frame and generates a CSV file with the same name as the input file
 #' but with a .csv extension.
-#' @export
+#'
 #' @examples
 #' \dontrun{
+#' # Example 1: XML string
 #' xml_string <- '<?xml version="1.0"?>
 #'<employees>
 #'  <employee>
@@ -32,7 +33,35 @@
 #'  </employee>
 #'</employees>'
 #' xml_to_csv(xml_string)
-#' }
+#'
+#' # Example 2: XML file
+#' # create temporary file
+#' temp_file <- tempfile(fileext = ".xml")
+#'
+#' # write XML content to temporary file
+#' cat('<?xml version="1.0"?>
+#' <employees>
+#'   <employee>
+#'     <firstName>John</firstName>
+#'     <lastName>Doe</lastName>
+#'   </employee>
+#'   <employee>
+#'     <firstName>Anna</firstName>
+#'     <lastName>Smith</lastName>
+#'   </employee>
+#'   <employee>
+#'     <firstName>Peter</firstName>
+#'     <lastName>Jones</lastName>
+#'   </employee>
+#' </employees>', file = temp_file)
+#'
+#' # call xml_to_csv function with temporary file
+#' xml_to_csv(temp_file)
+#'
+#' # remove temporary file
+#' file.remove(temp_file)
+#'}
+#' @export
 xml_to_csv <- function(file, n_tokens_limit = 2000, ...) {
 
   # import, process text
