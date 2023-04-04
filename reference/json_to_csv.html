@@ -51,13 +51,22 @@ generated with the same name as the input file but with a .csv extension.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">json_to_csv</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">json_to_csv</span><span class="op">(</span><span class="va">file</span>, n_tokens_limit <span class="op">=</span> <span class="fl">2000</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>file</dt>
-<dd><p>A character string representing the path to the file with JSON input</p></dd>
+<dd><p>A character string representing the path to the file with JSON input.</p></dd>
+
+
+<dt>n_tokens_limit</dt>
+<dd><p>An integer representing the maximum number of tokens allowed in the input text.
+Defaults to 2000.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Additional arguments passed down to lower-level functions.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -72,14 +81,15 @@ but with a .csv extension.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example: JSON string</span></span></span>
 <span class="r-in"><span><span class="va">json_string</span> <span class="op">&lt;-</span> <span class="st">'{"employees":[</span></span></span>
 <span class="r-in"><span><span class="st">{ "firstName":"John", "lastName":"Doe" },</span></span></span>
 <span class="r-in"><span><span class="st">{ "firstName":"Anna", "lastName":"Smith" },</span></span></span>
 <span class="r-in"><span><span class="st">{ "firstName":"Peter", "lastName":"Jones" }</span></span></span>
 <span class="r-in"><span><span class="st">]}'</span></span></span>
 <span class="r-in"><span><span class="fu">json_to_csv</span><span class="op">(</span><span class="va">json_string</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in OpenAIR::chat_completion(json_to_csv_prompt, ...):</span> API key is missing. Provide it as the 'api_key' argument or set it as the environment variable 'OPENAI_API_KEY'.</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
