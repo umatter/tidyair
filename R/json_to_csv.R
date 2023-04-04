@@ -16,6 +16,7 @@
 #' but with a .csv extension.
 #'
 #' @examples
+#' \dontrun{
 #' # Example: JSON string
 #' json_string <- '{"employees":[
 #' { "firstName":"John", "lastName":"Doe" },
@@ -23,7 +24,7 @@
 #' { "firstName":"Peter", "lastName":"Jones" }
 #' ]}'
 #' json_to_csv(json_string)
-#'
+#'}
 #' @export
 json_to_csv <- function(file, n_tokens_limit=2000, ...) {
 
