@@ -27,7 +27,7 @@ This is a basic example which shows you how to solve a common problem:
 library(tidyair)
 
 # set your OpenAI API key
-OpenAIR::openai_api_key("YOUR-KEY-HERE")
+TheOpenAIR::openai_api_key("YOUR-KEY-HERE")
 
  # Create a messy data.frame with air data
  messy_data <- data.frame(
