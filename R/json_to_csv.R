@@ -29,14 +29,14 @@
 json_to_csv <- function(file, n_tokens_limit=2000, ...) {
 
   # import, process text
-  r_function <- OpenAIR::read_text(file)
+  r_function <- TheOpenAIR::read_text(file)
   text <-
     r_function$text %>%
     paste0(collapse = "\n")
 
   # validate input string
   if (unique(r_function$file)=="character string") {
-    if (!OpenAIR::is_json(text)){
+    if (!TheOpenAIR::is_json(text)){
       stop("No valid JSON string provided!")
     }
   }
@@ -54,30 +54,28 @@ json_to_csv <- function(file, n_tokens_limit=2000, ...) {
     sprintf(fmt = json_to_csv_prompt$content[n_msgs], text)
 
   # Generate response output by chatting
-  resp <- OpenAIR::chat_completion(json_to_csv_prompt, ...)
-  #total_tokens_used <- OpenAIR::usage(resp)$total_tokens
-  #message("Total tokens used: ", total_tokens_used)
+  resp <- TheOpenAIR::chat_completion(json_to_csv_prompt, ...)
 
   # extract output
   output <-
     resp %>%
-    OpenAIR::messages_content()
+    TheOpenAIR::messages_content()
 
   # Check if filename is a character string
   # process output
   filename <- unique(r_function$file)
 
   if (filename == "character string") {
-    message(output)
     return(output)
 
   } else {
     # file name for csv file
-    filename <- OpenAIR::replace_file_extension(filename, ".csv")
+    filename <- TheOpenAIR::replace_file_extension(filename, ".csv")
     # parse and write csv
     output_df <- readr::read_csv(output)
     readr::write_csv(output_df, file = filename)
-    message("CSV-file generated: ", filename)
+    cli::cli_alert_success(paste0("CSV-file generated: ", filename))
+
     return(output_df)
 
   }

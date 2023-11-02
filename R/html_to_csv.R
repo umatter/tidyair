@@ -47,14 +47,14 @@
 html_to_csv <- function(file, n_tokens_limit=2000, ...) {
 
   # import, process text
-  r_function <- OpenAIR::read_text(file)
+  r_function <- TheOpenAIR::read_text(file)
   text <-
     r_function$text %>%
     paste0(collapse = "\n")
 
   # Check validity of input
   if (unique(r_function$file)=="character string") {
-    if (!OpenAIR::is_xml(text)){
+    if (!TheOpenAIR::is_xml(text)){
       stop("No valid HTML/XML string provided!")
     }
   }
@@ -78,30 +78,29 @@ html_to_csv <- function(file, n_tokens_limit=2000, ...) {
     sprintf(fmt = html_to_csv_prompt$content[n_msgs], text)
 
   # Generate response output by chatting
-  resp <- OpenAIR::chat_completion(html_to_csv_prompt, ...)
-  #total_tokens_used <- OpenAIR::usage(resp)$total_tokens
-  #message("Total tokens used: ", total_tokens_used)
+  resp <- TheOpenAIR::chat_completion(html_to_csv_prompt, ...)
+
 
   # extract output
   output <-
     resp %>%
-    OpenAIR::messages_content()
+    TheOpenAIR::messages_content()
 
   # Check if filename is a character string
   # process output
   filename <- unique(r_function$file)
 
   if (filename == "character string") {
-    message(output)
     return(output)
 
   } else {
     # file name for csv file
-    filename <- OpenAIR::replace_file_extension(filename, ".csv")
+    filename <- TheOpenAIR::replace_file_extension(filename, ".csv")
     # parse and write csv
     output_df <- readr::read_csv(output)
     readr::write_csv(output_df, file = filename)
-    message("CSV-file generated: ", filename)
+    cli::cli_alert_success(paste0("CSV-file generated: ", filename))
+
     return(output_df)
 
   }

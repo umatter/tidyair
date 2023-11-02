@@ -33,7 +33,7 @@ if (!nchar(Sys.getenv("OPENAI_API_KEY")) == 0) {
 
       # Check result
       expect_true(is.data.frame(result))
-      expect_true(file.exists(OpenAIR::replace_file_extension(test_file, ".csv")))
+      expect_true(file.exists(TheOpenAIR::replace_file_extension(test_file, ".csv")))
     })
 
     # Test that function prints output for valid input as character string

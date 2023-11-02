@@ -31,7 +31,7 @@ if (!nchar(Sys.getenv("OPENAI_API_KEY")) == 0) {
       result <- tidyair(test_file)
 
       # Check result
-      expect_true(file.exists(paste0(OpenAIR::replace_file_extension(test_file, ""), "-tidy.csv")))
+      expect_true(file.exists(paste0(TheOpenAIR::replace_file_extension(test_file, ""), "-tidy.csv")))
     })
 
     # Test that function throws an error for invalid input

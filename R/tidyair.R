@@ -14,8 +14,8 @@
 #' @author Ulrich Matter umatter@protonmail.com
 #'
 #' @export
-#' @import OpenAIR
-#' @importClassesFrom OpenAIR chatlog
+#' @import TheOpenAIR
+#' @importClassesFrom TheOpenAIR chatlog
 #' @examples
 #' \dontrun{
 #' # Create a messy data.frame with air data
@@ -51,11 +51,11 @@ tidyair <- function(file) {
 
   is_df <- is.data.frame(file)
   if (is_df) {
-    file <- OpenAIR::df_to_csv(file)
+    file <- TheOpenAIR::df_to_csv(file)
   }
 
   # import, process text
-  r_function <- OpenAIR::read_text(file)
+  r_function <- TheOpenAIR::read_text(file)
   text <-
     r_function$text %>%
     paste0(collapse = "\n")
@@ -66,14 +66,14 @@ tidyair <- function(file) {
     sprintf(fmt = tidyair_prompt$content[n_msgs], text)
 
   # Generate response output by chatting
-  resp <- OpenAIR::chat_completion(tidyair_prompt)
-  #total_tokens_used <- OpenAIR::usage(resp)$total_tokens
+  resp <- TheOpenAIR::chat_completion(tidyair_prompt)
+  #total_tokens_used <- TheOpenAIR::usage(resp)$total_tokens
   #message("Total tokens used: ", total_tokens_used)
 
   # extract output
   output <-
     resp %>%
-    OpenAIR::messages_content()
+    TheOpenAIR::messages_content()
 
   # process output
   filename <- unique(r_function$file)
@@ -85,12 +85,12 @@ tidyair <- function(file) {
 
   } else {
     # file name for csv file
-    filename <- paste0(OpenAIR::replace_file_extension(filename, ""), "-tidy.csv")
+    filename <- paste0(TheOpenAIR::replace_file_extension(filename, ""), "-tidy.csv")
 
     # parse and write csv
     output_df <- readr::read_csv(output)
     readr::write_csv(output_df, file = filename)
-    message("CSV-file generated: ", filename)
+    cli::cli_alert_success(paste0("CSV-file generated: ", filename))
 
     return(filename)
   }
