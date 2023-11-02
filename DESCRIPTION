@@ -17,5 +17,6 @@ Imports:
     magrittr,
     TheOpenAIR,
     readr,
-    rvest
+    rvest,
+    cli
 URL: https://umatter.github.io/tidyair/
